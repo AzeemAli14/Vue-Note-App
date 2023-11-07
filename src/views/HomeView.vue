@@ -22,7 +22,7 @@
 
 <!-- Compsition API -->
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
 
 // Non-Reactive Value
 const appTitle = 'Vue Counter App'
@@ -44,12 +44,20 @@ const decrement = (amount) => {
   counterData.count -= amount
 }
 
+// Computed
 const computedNum = computed(() => {
   if (counterData.count % 2 === 0) {
     return 'Even'
   }
   else {
     return 'Odd'
+  }
+})
+
+// watch
+watch(() => counterData.count, (newVal, oldVal) => {
+  if (newVal === 10) {
+    alert('10 reached ... Hoorah!')
   }
 })
 </script>
@@ -107,7 +115,7 @@ const computedNum = computed(() => {
   margin: 10px;
 }
 
-.title {
+.title, .computed {
   margin-top: 40px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
@@ -120,10 +128,4 @@ const computedNum = computed(() => {
   text-align: center;
 }
 
-.computed {
-  margin-top: 40px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
-  font-weight: 500;
-}
 </style>
