@@ -1,5 +1,4 @@
 <template>
-
   <h1 class="appTitle">{{ appTitle }}</h1>
 
   <div class="home">
@@ -8,18 +7,22 @@
     <span class="counter">{{ counterData.count }}</span>
     <button @click="increment(1)" class="btn">+</button>
     <button @click="increment(2)" class="btn">++</button>
-    
+    <div class="computed">
+      <p>This number is: {{ computedNum }}</p>
+    </div>
+
     <div class="title">
       <h4>Change Title:</h4>
       <input type="text" v-model="counterData.modTitle">
     </div>
+
   </div>
   <h1 class="title">{{ counterData.modTitle }}</h1>
 </template>
 
 <!-- Compsition API -->
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 
 // Non-Reactive Value
 const appTitle = 'Vue Counter App'
@@ -33,13 +36,22 @@ const counterData = reactive({
   modTitle: 'Customize Title'
 })
 
-    const increment = (amount) => {
-      counterData.count += amount
-    }
+const increment = (amount) => {
+  counterData.count += amount
+}
 
-    const decrement = (amount) => {
-      counterData.count -= amount
-    }
+const decrement = (amount) => {
+  counterData.count -= amount
+}
+
+const computedNum = computed(() => {
+  if (counterData.count % 2 === 0) {
+    return 'Even'
+  }
+  else {
+    return 'Odd'
+  }
+})
 </script>
 
 // export default {
@@ -108,4 +120,10 @@ const counterData = reactive({
   text-align: center;
 }
 
+.computed {
+  margin-top: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  font-weight: 500;
+}
 </style>
