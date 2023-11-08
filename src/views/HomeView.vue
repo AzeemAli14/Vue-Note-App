@@ -13,7 +13,7 @@
 
     <div class="title">
       <h4>Change Title:</h4>
-      <input type="text" v-model="counterData.modTitle">
+      <input type="text" v-focus="vFocus" v-model="counterData.modTitle">
     </div>
 
   </div>
@@ -22,15 +22,19 @@
 
 <!-- Compsition API -->
 <script setup>
-import { ref, reactive, computed, watch, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue';
 
-// Non-Reactive Value
+// imports
+import { ref, reactive, computed, watch, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, onActivated, onDeactivated } from 'vue';
+import {vFocus} from '@/directives/vFocus.js';
+// Non-Reactive Value {{**App Title**}}
 const appTitle = 'Vue Counter App'
 
 //  Using refs
 // const count = ref(0)
 // const modTitle = ref('Change Title')
 
+
+//  Using reactive Value {**Couter**}
 const counterData = reactive({
   count: 0,
   modTitle: 'Customize Title'
@@ -44,7 +48,7 @@ const decrement = (amount) => {
   counterData.count -= amount
 }
 
-// Computed
+// Computed Value
 const computedNum = computed(() => {
   if (counterData.count % 2 === 0) {
     return 'Even'
@@ -54,7 +58,7 @@ const computedNum = computed(() => {
   }
 })
 
-// watch
+// watch Value
 watch(() => counterData.count, (newVal, oldVal) => {
   if (newVal === 10) {
     alert('10 reached ... Hoorah!')
@@ -86,7 +90,13 @@ onUnmounted(() => {
   console.log('onUnmounted')
 })
 
+onActivated(() => {
+  console.log('onActivated')
+})
 
+onDeactivated(() => {
+  console.log('onDeactivated')
+})
 </script>
 
 // export default {
@@ -153,6 +163,10 @@ onUnmounted(() => {
   font-size: 50px;
   margin-top: 30px;
   text-align: center;
+}
+
+.text :focus {
+  background-color: #41b883;
 }
 
 </style>
