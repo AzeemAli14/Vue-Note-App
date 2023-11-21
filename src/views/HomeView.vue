@@ -1,4 +1,20 @@
 <template>
+
+<div class="border-double border-4 my-6 border-green-700 rounded-xl text-center">
+    <h1 class="text-2xl text-[#41b883]">Routes</h1>
+  <ul class="flex text-center justify-center gap-5 border-double rounded-md bg-[#41b883] py-4">
+    <li>
+      <RouterLink to="/post/id1" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 1</RouterLink>
+    </li>
+    <li>
+      <RouterLink to="/post/id2" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 2</RouterLink>
+    </li>
+    <li>
+      <RouterLink to="/post/id3" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 3</RouterLink>
+    </li>
+  </ul>
+  </div>
+
   <h1 class="appTitle">{{ appTitle }}</h1>
 
   <div class="home">
@@ -13,7 +29,7 @@
 
     <div class="title">
       <h4>Change Title:</h4>
-      <input type="text" v-focus="vFocus" v-model="counterData.modTitle">
+      <input class="text-black rounded-xl px-3 border-double border-4 border-[#41b883] my-4" type="text" v-focus="vFocus" v-model="counterData.modTitle">
     </div>
 
   </div>
@@ -153,7 +169,7 @@ onDeactivated(() => {
 }
 
 .title, .computed {
-  margin-top: 40px;
+  margin-top: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
 }
