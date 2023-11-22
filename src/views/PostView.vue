@@ -10,6 +10,9 @@
       }}</span>
       here!
     </p>
+    <div class="my-4 flex">
+    <button class="border-4 border-[#34495e] text-white px-3 py-1 bg-[#41b883] rounded-xl hover:bg-green-300 m-auto justify-center" @click="showPostId">Show Post ID</button>
+    </div>
     <p>
       <RouterLink
         to="/"
@@ -20,6 +23,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const showPostId = () => {
+  alert('The ID of this post is: ${route.params.id}');
+}
+</script>
 
 <style scoped></style>

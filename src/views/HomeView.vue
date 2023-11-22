@@ -1,7 +1,7 @@
 <template>
 
 <div class="border-double border-4 my-6 border-green-700 rounded-xl text-center">
-    <h1 class="text-2xl text-[#41b883]">Routes</h1>
+    <h1 class="text-2xl text-[#41b883] bg-[#34495e] font-bold">Routes</h1>
   <ul class="flex text-center justify-center gap-5 border-double rounded-md bg-[#41b883] py-4">
     <li>
       <RouterLink to="/post/id1" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 1</RouterLink>
