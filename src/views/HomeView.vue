@@ -1,18 +1,19 @@
 <template>
-
-<div class="border-double border-4 my-6 border-green-700 rounded-xl text-center">
+  <div
+    class="border-double border-4 my-6 border-green-700 rounded-xl text-center"
+  >
     <h1 class="text-2xl text-[#41b883] bg-[#34495e] font-bold">Routes</h1>
-  <ul class="flex text-center justify-center gap-5 border-double rounded-md bg-[#41b883] py-4">
-    <li>
-      <RouterLink to="/post/id1" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 1</RouterLink>
-    </li>
-    <li>
-      <RouterLink to="/post/id2" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 2</RouterLink>
-    </li>
-    <li>
-      <RouterLink to="/post/id3" class="font-bold hover:text-white text-xl text-green-700 text-bold">Post 3</RouterLink>
-    </li>
-  </ul>
+    <ul
+      class="flex text-center justify-center gap-5 border-double rounded-md bg-[#41b883] py-4"
+    >
+      <li v-for="post in posts" :key="post.id">
+        <RouterLink
+          :to="{ name: 'post', params: { id: post.id } }"
+          class="font-bold hover:text-white text-xl text-green-700 text-bold"
+          >{{ post.title }}</RouterLink
+        >
+      </li>
+    </ul>
   </div>
 
   <h1 class="appTitle">{{ appTitle }}</h1>
@@ -29,112 +30,138 @@
 
     <div class="title">
       <h4>Change Title:</h4>
-      <input class="text-black rounded-xl px-3 border-double border-4 border-[#41b883] my-4" type="text" v-focus="vFocus" v-model="counterData.modTitle">
+      <input
+        class="text-black rounded-xl px-3 border-double border-4 border-[#41b883] my-4"
+        type="text"
+        v-focus="vFocus"
+        v-model="counterData.modTitle"
+      />
     </div>
-
   </div>
   <h1 class="title">{{ counterData.modTitle }}</h1>
 </template>
 
 <!-- Compsition API -->
 <script setup>
-
 // imports
-import { ref, reactive, computed, watch, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, onActivated, onDeactivated } from 'vue';
-import {vFocus} from '@/directives/vFocus.js';
+import {
+  nextTick,
+  ref,
+  reactive,
+  computed,
+  watch,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+  onActivated,
+  onDeactivated,
+} from "vue";
+import { vFocus } from "@/directives/vFocus.js";
 // Non-Reactive Value {{**App Title**}}
-const appTitle = 'Vue Counter App'
+const appTitle = "Vue Counter App";
 
 //  Using refs
 // const count = ref(0)
 // const modTitle = ref('Change Title')
 
-
 //  Using reactive Value {**Couter**}
 const counterData = reactive({
   count: 0,
-  modTitle: 'Customize Title'
-})
+  modTitle: "Customize Title",
+});
 
 const increment = (amount) => {
-  counterData.count += amount
-}
+  counterData.count += amount;
+  nextTick(() => {
+    if (counterData.count ++ ) {
+      alert("Counter Incremented");
+    }
+  })
+};
 
 const decrement = (amount) => {
-  counterData.count -= amount
-}
+  counterData.count -= amount;
+  nextTick(() => {
+    if (counterData.count -- ) {
+      alert("Counter Decremented");
+    }
+  })
+};
 
 // Computed Value
 const computedNum = computed(() => {
   if (counterData.count % 2 === 0) {
-    return 'Even'
+    return "Even";
+  } else {
+    return "Odd";
   }
-  else {
-    return 'Odd'
-  }
-})
+});
 
 // watch Value
-watch(() => counterData.count, (newVal, oldVal) => {
-  if (newVal === 10) {
-    alert('10 reached ... Hoorah!')
+watch(
+  () => counterData.count,
+  (newVal, oldVal) => {
+    if (newVal === 10) {
+      alert("10 reached ... Hoorah!");
+    }
   }
-})
+);
 
 // Lifecycle Hooks
 onBeforeMount(() => {
-  console.log('onBeforeMount')
+  console.log("onBeforeMount");
 }),
-
-onMounted(() => {
-  console.log('onMounted')
-})
+  onMounted(() => {
+    console.log("onMounted");
+  });
 
 onBeforeUpdate(() => {
-  console.log('onBeforeUpdate')
-})
+  console.log("onBeforeUpdate");
+});
 
 onUpdated(() => {
-  console.log('onUpdated')
-})
+  console.log("onUpdated");
+});
 
 onBeforeUnmount(() => {
-  console.log('onBeforeUnmount')
-})
+  console.log("onBeforeUnmount");
+});
 
 onUnmounted(() => {
-  console.log('onUnmounted')
-})
+  console.log("onUnmounted");
+});
 
 onActivated(() => {
-  console.log('onActivated')
-})
+  console.log("onActivated");
+});
 
 onDeactivated(() => {
-  console.log('onDeactivated')
-})
+  console.log("onDeactivated");
+});
+
+//Posts
+const posts = ref([
+  {
+    id: 'id1',
+    title: "Post 1",
+  },
+  {
+    id: 'id2',
+    title: "Post 2",
+  },
+  {
+    id: 'id3',
+    title: "Post 3",
+  },
+]);
 </script>
 
-// export default {
-//   setup() {
-//     const count = ref(0)
-
-//     const increment = () => {
-//       count.value++
-//     }
-
-//     const decrement = () => {
-//       count.value--
-//     }
-
-//     return {
-//       count,
-//       increment,
-//       decrement
-//     }
-//   }
-// }
-
+// export default { // setup() { // const count = ref(0) // const increment = ()
+=> { // count.value++ // } // const decrement = () => { // count.value-- // } //
+return { // count, // increment, // decrement // } // } // }
 
 <!-- Option API -->
 <!-- <script>
@@ -168,7 +195,8 @@ onDeactivated(() => {
   margin: 10px;
 }
 
-.title, .computed {
+.title,
+.computed {
   margin-top: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
@@ -184,5 +212,4 @@ onDeactivated(() => {
 .text :focus {
   background-color: #41b883;
 }
-
 </style>
