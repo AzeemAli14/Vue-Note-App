@@ -1,10 +1,10 @@
 <template>
   <div
-    class="border-double border-4 my-6 border-green-700 rounded-xl text-center"
+    class="border-double border-4 my-6 border-green-700 rounded-xl text-center max-w-[500px] mx-auto"
   >
     <h1 class="text-2xl text-[#41b883] bg-[#34495e] font-bold">Routes</h1>
     <ul
-      class="flex text-center justify-center gap-5 border-double rounded-md bg-[#41b883] py-4"
+      class="flex text-center justify-center gap-5 border-double rounded-md bg-[#41b883] py-4 mx-auto"
     >
       <li v-for="post in posts" :key="post.id">
         <RouterLink
@@ -76,19 +76,19 @@ const counterData = reactive({
 const increment = (amount) => {
   counterData.count += amount;
   nextTick(() => {
-    if (counterData.count ++ ) {
+    if (counterData.count++) {
       alert("Counter Incremented");
     }
-  })
+  });
 };
 
 const decrement = (amount) => {
   counterData.count -= amount;
   nextTick(() => {
-    if (counterData.count -- ) {
+    if (counterData.count--) {
       alert("Counter Decremented");
     }
-  })
+  });
 };
 
 // Computed Value
@@ -145,42 +145,19 @@ onDeactivated(() => {
 //Posts
 const posts = ref([
   {
-    id: 'id1',
+    id: "id1",
     title: "Post 1",
   },
   {
-    id: 'id2',
+    id: "id2",
     title: "Post 2",
   },
   {
-    id: 'id3',
+    id: "id3",
     title: "Post 3",
   },
 ]);
 </script>
-
-// export default { // setup() { // const count = ref(0) // const increment = ()
-=> { // count.value++ // } // const decrement = () => { // count.value-- // } //
-return { // count, // increment, // decrement // } // } // }
-
-<!-- Option API -->
-<!-- <script>
-// export default {
-//   data() {
-//     return {
-//       count: 0
-//     }
-//   },
-//   methods: {
-//     increment() {
-//       this.count++
-//     },
-//     decrement() {
-//       this.count--
-//     }
-//   }
-// }
-</script> -->
 
 <style scoped>
 .home {
